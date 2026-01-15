@@ -9,9 +9,13 @@ public class CoachTrainingCount {
         this.count = count;
     }
 
-    public Coach getCoach() { return coach; }
+    public Coach getCoach() {
+        return coach;
+    }
 
-    public int getCount() { return count; }
+    public int getCount() {
+        return count;
+    }
 
     public void setCoach(Coach coach) {
         this.coach = coach;
