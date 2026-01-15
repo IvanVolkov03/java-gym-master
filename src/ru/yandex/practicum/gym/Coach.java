@@ -25,7 +25,9 @@ public class Coach {
         return name;
     }
 
-    public String getMiddleName() { return middleName; }
+    public String getMiddleName() {
+        return middleName;
+    }
 
     public void setSurname(String surname) {
         this.surname = surname;
