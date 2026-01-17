@@ -1,5 +1,7 @@
 package ru.yandex.practicum.gym;
 
+import java.util.Objects;
+
 public class CoachTrainingCount {
     private Coach coach;
     private int count;
@@ -26,9 +28,22 @@ public class CoachTrainingCount {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        CoachTrainingCount that = (CoachTrainingCount) o;
+        return count == that.count && Objects.equals(coach, that.coach);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(coach, count);
+    }
+
+    @Override
     public String toString() {
         return "CoachTrainingCount{" +
                 "coach=" + coach +
+                ", count=" + count +
                 '}';
     }
 }

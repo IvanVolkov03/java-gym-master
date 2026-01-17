@@ -23,10 +23,16 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     }
 
     public void setMinutes(int minutes) {
+        if (minutes < 0 || minutes > 59) {
+            throw new IllegalArgumentException("Минуты должны быть в диапазоне от 0 до 59. Передано: " + minutes);
+        }
         this.minutes = minutes;
     }
 
     public void setHours(int hours) {
+        if (hours < 0 || hours > 23) { // Для 24-часового формата
+            throw new IllegalArgumentException("Часы должны быть в диапазоне от 0 до 23. Передано: " + hours);
+        }
         this.hours = hours;
     }
 
@@ -47,5 +53,13 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     @Override
     public int hashCode() {
         return Objects.hash(hours, minutes);
+    }
+
+    @Override
+    public String toString() {
+        return "TimeOfDay{" +
+                "hours=" + hours +
+                ", minutes=" + minutes +
+                '}';
     }
 }

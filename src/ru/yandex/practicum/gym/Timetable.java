@@ -4,6 +4,7 @@ import java.util.*;
 public class Timetable {
 
     private Map<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>> timetable = new HashMap<>();
+    private List<TrainingSession> allSessions = new ArrayList<>();
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
         //сохраняем занятие в расписании
@@ -19,6 +20,8 @@ public class Timetable {
 
         // Добавляем занятие
         dayMap.get(time).add(trainingSession);
+
+        allSessions.add(trainingSession);
     }
 
     public TreeMap<TimeOfDay, List<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
@@ -27,25 +30,20 @@ public class Timetable {
 
     public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         TreeMap<TimeOfDay, List<TrainingSession>> dayMap = timetable.get(dayOfWeek);
-        if (dayMap == null) {
-            return Collections.emptyList();
-        }
-        return dayMap.getOrDefault(timeOfDay, Collections.emptyList());
+        return timetable.get(dayOfWeek) == null ? Collections.emptyList() :
+                dayMap.getOrDefault(timeOfDay, Collections.emptyList());
     }
 
     public List<CoachTrainingCount> getCountByCoaches() {
         //Создаем таблицу для подсчета
         Map<Coach, Integer> counts = new HashMap<>();
 
-        for (TreeMap<TimeOfDay, List<TrainingSession>> dayMap : timetable.values()) {
-            // dayMap.values() дает нам все List<TrainingSession> (занятия в разное время)
-            for (List<TrainingSession> sessions : dayMap.values()) {
-                for (TrainingSession session : sessions) {
-                    Coach coach = session.getCoach();
-                    // Увеличиваем счетчик для тренера
-                    counts.put(coach, counts.getOrDefault(coach, 0) + 1);
-                }
-            }
+        for (TrainingSession session : allSessions) {
+            Coach coach = session.getCoach();
+
+            // Получаем текущее значение (если его нет, то 0) и прибавляем 1
+            int currentCount = counts.getOrDefault(coach, 0);
+            counts.put(coach, currentCount + 1);
         }
 
         //Переносим данные в список для сортировки

@@ -30,15 +30,15 @@ public class Coach {
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        this.surname = (surname != null) ? surname.trim() : null;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = (name != null) ? name.trim() : null;
     }
 
     public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+        this.middleName = (middleName != null) ? middleName.trim() : null;
     }
 
     @Override
@@ -52,5 +52,14 @@ public class Coach {
     @Override
     public int hashCode() {
         return Objects.hash(surname, name, middleName);
+    }
+
+    @Override
+    public String toString() {
+        return "Coach{" +
+                "surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", middleName='" + middleName + '\'' +
+                '}';
     }
 }
