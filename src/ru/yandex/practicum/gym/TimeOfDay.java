@@ -14,6 +14,28 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
         this.minutes = minutes;
     }
 
+    public int getHours() {
+        return hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        if (minutes < 0 || minutes > 59) {
+            throw new IllegalArgumentException("Минуты должны быть в диапазоне от 0 до 59. Передано: " + minutes);
+        }
+        this.minutes = minutes;
+    }
+
+    public void setHours(int hours) {
+        if (hours < 0 || hours > 23) { // Для 24-часового формата
+            throw new IllegalArgumentException("Часы должны быть в диапазоне от 0 до 23. Передано: " + hours);
+        }
+        this.hours = hours;
+    }
+
     @Override
     public int compareTo(TimeOfDay o) {
         if (hours != o.hours) return hours - o.hours;
@@ -33,11 +55,11 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
         return Objects.hash(hours, minutes);
     }
 
-    public int getHours() {
-        return hours;
-    }
-
-    public int getMinutes() {
-        return minutes;
+    @Override
+    public String toString() {
+        return "TimeOfDay{" +
+                "hours=" + hours +
+                ", minutes=" + minutes +
+                '}';
     }
 }

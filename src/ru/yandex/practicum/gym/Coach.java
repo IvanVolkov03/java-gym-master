@@ -17,6 +17,30 @@ public class Coach {
         this.middleName = middleName;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = (surname != null) ? surname.trim() : null;
+    }
+
+    public void setName(String name) {
+        this.name = (name != null) ? name.trim() : null;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = (middleName != null) ? middleName.trim() : null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -30,15 +54,12 @@ public class Coach {
         return Objects.hash(surname, name, middleName);
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getMiddleName() {
-        return middleName;
+    @Override
+    public String toString() {
+        return "Coach{" +
+                "surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", middleName='" + middleName + '\'' +
+                '}';
     }
 }
